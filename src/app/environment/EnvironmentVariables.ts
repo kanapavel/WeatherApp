@@ -7,7 +7,7 @@ export const EnvironmentVariables = {
 
     //variable for API key name and value
     xRapidApikeyName:'x-rapidapi-key',
-    xRapidApikeyValue:'eeb5527aa8msh2c2120b438f7b9fp11309ejsn9c8a472727b0',
+    xRapidApikeyValue:'1c612778f8msh6f2c7a515f7a7edp1acb54jsn28710ab2383a',
 
     //variable for host name and value
     xRapidApiHostName:'x-rapidapi-host',
