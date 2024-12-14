@@ -1,0 +1,20 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 max-lg:grid-cols-5 lg:grid-cols-7 gap-4 mt-5" *ngIf="today == false">
+    <div  *ngFor="let card of weatherService.weekData"
+        class="flex flex-col items-center justify-center bg-white rounded-lg h-full p-2 md:h-40">
+        <div class="flex flex-col items-center justify-center">
+            <h2>{{card.day}}</h2>
+            <img class="w-20 my-2" src={{card.summaryImage}} alt="">
+            <p><strong> {{this.weatherService.celcius == true ? card.tempMax: this.weatherService.celsiusToFahrenheit(card.tempMax) }}°</strong><span class="text-gray-300">-{{this.weatherService.celcius == true ? card.tempMin: this.weatherService.celsiusToFahrenheit(card.tempMin)}}°</span></p>
+        </div>
+    </div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4 mt-5" *ngIf="today == true">
+    <div *ngFor="let card of weatherService.todayData"
+        class="flex flex-col items-center justify-center bg-white rounded-lg h-full p-2 md:h-40">
+        <div class="flex flex-col items-center justify-center">
+            <h2>{{card.time}}</h2>
+            <img class="w-20 my-2" src={{card.summaryImage}} alt="">
+            <p><strong> {{this.weatherService.celcius == true ? card.temperature: this.weatherService.celsiusToFahrenheit(card.temperature) }}° </strong></p>
+        </div>
+    </div>
+</div>

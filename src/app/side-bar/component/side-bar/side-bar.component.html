@@ -1,0 +1,55 @@
+<aside
+    class="fixed top-0 left-0 z-40 w-80 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+    aria-label="Sidenav" id="drawer-navigation">
+    <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
+        <form action="#" class="md:hidden mb-2">
+            <label for="sidebar-search" class="sr-only">Search</label>
+            <div class="relative">
+                <button (click)="onSearch(location.value)" class="flex absolute inset-y-0 left-0 items-center pl-3">
+                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z">
+                        </path>
+                    </svg>
+                </button>
+                <input type="search" name="search" id="sidebar-search"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Search places"
+                    (keydown.enter)="$event.preventDefault(); onSearch(location.value)"
+                    #location />
+            </div>
+        </form>
+        <div class="border-b">
+            <div class="flex items-center justify-center w-full">
+                <img class="w-4/5" src={{this.weatherService.temperatureData.summaryImage}} alt="summaryImage">
+            </div>
+            <div class="relative w-4/5 flex flex-col items-center justify-center">
+                <p class="text-8xl">
+                     {{this.weatherService.celcius == true ? this.weatherService.temperatureData.temperature:this.weatherService.celsiusToFahrenheit(this.weatherService.temperatureData.temperature)}}
+                    <span class="absolute text-5xl">{{this.weatherService.celcius == true ? "°C": "°F" }}</span>
+                </p>
+                <div>
+                    <h2 class="w-4/5 flex items-center justify-center text-xl my-4 ml-8">
+                        {{this.weatherService.temperatureData.day}},
+                        <span class="text-gray-400">{{this.weatherService.temperatureData.time}}</span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5 ">
+            <div class="flex items-center gap-3 ml-14">
+                <img class="w-8" src="assets/nuage/icons8-nuage-50.png" alt="">
+                <p>{{this.weatherService.temperatureData.summaryPhrase}}</p>
+            </div>
+            <div class="flex items-center gap-3 ml-14 my-4">
+                <img class="w-8" src="assets/pluie-important/icons8-pluie-importante-48.png" alt="">
+                <p>Rain - {{this.weatherService.temperatureData.rainPercent}}</p>
+            </div>
+            <div class="relative w-full">
+                <img class="w-full rounded-md" src="assets/ville.jpg" alt="">
+                <div class="absolute -left-10 top-16 translate-x-1/2 translate-y-1/2 z-10  text-xl font-medium text-white">{{this.weatherService.temperatureData.location}}</div>
+            </div>
+        </div>
+    </div>
+</aside>

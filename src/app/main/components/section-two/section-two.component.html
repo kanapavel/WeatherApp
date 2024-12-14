@@ -1,0 +1,106 @@
+<div class="grid grid-cols-3 gap-5 mb-4 max-lg:grid-cols-2">
+    <div
+      class="flex flex-col items-center justify-center p-4 bg-white rounded-lg h-48 md:h-48"
+    >
+        <h2 class="text-base font-medium text-gray-400">UV Index</h2>
+        <div class="gauche">
+            <div class="gauche_body">
+                <div class="gauche_fill"></div>
+                <div class="gauche_cover"></div>
+            </div>
+        </div>
+        <p class="text-5xl z-10 flex-1 -mt-5">{{this.weatherService.todaysHighLight.uvIndex}}</p>
+    </div>
+    <div
+      class="flex flex-col items-center justify-center p-4 bg-white rounded-lg h-48 md:h-48"
+    >
+        <h2 class="text-base font-medium text-gray-400">Wind Status</h2>
+        <div class="h-32 flex justify-center items-center">
+            <p class=""><span class="text-5xl">{{this.weatherService.todaysHighLight.windStatus}}</span> km/h</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <div class="flex items-center  justify-center p-1 border-4 border-gray-200 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 stroke-purple-700">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                </svg>
+            </div>
+            <p class="font-bold">WSW</p>
+        </div>
+        
+    </div>
+        <div
+        class="flex flex-col items-center justify-center p-4 bg-white rounded-lg h-48 md:h-48"
+        >
+            <h2 class="text-base font-medium text-gray-400">Sunrise & Sunset</h2>
+        <div class="h-32 ">
+            <div class="flex gap-3 my-4">
+                <div class="flex items-center w-10 h-10 justify-center border-2 border-yellow-300 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-yellow-300">
+                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <p class="flex flex-col">
+                    <span>{{this.weatherService.todaysHighLight.sunrise}} AM</span>
+                    <small class="text-gray-400">-1m 46s</small>
+                </p>
+            </div>
+            <div class="flex gap-3">
+                <div class="flex items-center w-10 h-10 justify-center border-2 border-yellow-300 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-yellow-300">
+                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72 1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z" clip-rule="evenodd" />
+                    </svg>        
+                </div>
+                <p class="flex flex-col">
+                    <span>{{this.weatherService.todaysHighLight.sunset}} PM</span>
+                    <small class="text-gray-400">+1m 46s</small>
+                </p>
+            </div>          
+        </div>
+    </div>
+    <div
+      class="flex flex-col items-center justify-center p-4 bg-white rounded-lg h-48 md:h-48"
+    >
+        <h2 class="text-base font-medium text-gray-400">Humidity</h2>
+        <div class=" relative h-32 flex justify-center items-center">
+            <p class="text-5xl">{{this.weatherService.todaysHighLight.humidity}}<span class="absolute text-xl">%</span></p>
+        </div>
+        <div class="flex gap-3">
+            <span>Normal</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-purple-700">
+                <path d="M7.493 18.5c-.425 0-.82-.236-.975-.632A7.48 7.48 0 0 1 6 15.125c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75A.75.75 0 0 1 15 2a2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23h-.777ZM2.331 10.727a11.969 11.969 0 0 0-.831 4.398 12 12 0 0 0 .52 3.507C2.28 19.482 3.105 20 3.994 20H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 0 1-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227Z" />
+            </svg>
+        </div>
+    </div>
+    <div
+      class="flex flex-col items-center justify-center p-4 bg-white rounded-lg h-48 md:h-48"
+    >
+        <h2 class="text-base font-medium text-gray-400">Visibility</h2>
+        <div class="h-32 flex justify-center items-center">
+            <p class=""><span class="text-5xl">{{this.weatherService.todaysHighLight.visibility}}</span> km</p>
+        </div>
+        <div class="flex gap-3">
+            <span>Average</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-purple-700">
+                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 0 0-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634Zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 0 1-.189-.866c0-.298.059-.605.189-.866Zm-4.34 7.964a.75.75 0 0 1-1.061-1.06 5.236 5.236 0 0 1 3.73-1.538 5.236 5.236 0 0 1 3.695 1.538.75.75 0 1 1-1.061 1.06 3.736 3.736 0 0 0-2.639-1.098 3.736 3.736 0 0 0-2.664 1.098Z" clip-rule="evenodd" />
+            </svg>
+        </div>
+       
+          
+    </div>
+    <div
+      class="flex flex-col items-center justify-center p-4 bg-white rounded-lg h-48 md:h-48"
+    >
+        <h2 class="text-base font-medium text-gray-400">Air Quality</h2>
+        <div class="h-32 flex justify-center items-center">
+            <p class=""><span class="text-5xl">{{this.weatherService.todaysHighLight.airQuality}}</span></p>
+        </div>
+        <div class="flex gap-3">
+            <span>Unhealthy</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-purple-700">
+                <path d="M15.73 5.5h1.035A7.465 7.465 0 0 1 18 9.625a7.465 7.465 0 0 1-1.235 4.125h-.148c-.806 0-1.534.446-2.031 1.08a9.04 9.04 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.499 4.499 0 0 0-.322 1.672v.633A.75.75 0 0 1 9 22a2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521C4.537 4.247 5.136 4 5.754 4H9.77a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23ZM21.669 14.023c.536-1.362.831-2.845.831-4.398 0-1.22-.182-2.398-.52-3.507-.26-.85-1.084-1.368-1.973-1.368H19.1c-.445 0-.72.498-.523.898.591 1.2.924 2.55.924 3.977a8.958 8.958 0 0 1-1.302 4.666c-.245.403.028.959.5.959h1.053c.832 0 1.612-.453 1.918-1.227Z" />
+            </svg>
+        </div> 
+    </div>
+    
+</div>

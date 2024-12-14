@@ -25,3 +25,17 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+=============================================================================================================
+
+## important!
+please change the key API because have expired
+connect to `https://rapidapi.com/` 
+search `weather api`
+on result select `API dojo`
+
+change key Api on folder `environment`
+## replace this to your key Api 
+`xRapidApikeyValue`:'eeb5527aa8msh2c2120b438f7b9fp11309ejsn9c8a472727b0'
+
+=============================================================================================================
