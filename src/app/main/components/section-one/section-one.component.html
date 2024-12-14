@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 max-lg:grid-cols-5 lg:grid-cols-7 gap-4 mt-5" *ngIf="today == false">
+<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-7 gap-4 mt-5" *ngIf="today == false">
     <div  *ngFor="let card of weatherService.weekData"
         class="flex flex-col items-center justify-center bg-white rounded-lg h-full p-2 md:h-40">
         <div class="flex flex-col items-center justify-center">
@@ -8,7 +8,7 @@
         </div>
     </div>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4 mt-5" *ngIf="today == true">
+<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-7 gap-4 mt-5" *ngIf="today == true">
     <div *ngFor="let card of weatherService.todayData"
         class="flex flex-col items-center justify-center bg-white rounded-lg h-full p-2 md:h-40">
         <div class="flex flex-col items-center justify-center">
