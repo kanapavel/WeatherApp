@@ -1,20 +1,33 @@
-import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { NgClass, TitleCasePipe } from '@angular/common';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { WeatherService } from '../core/services/weather.service';
+import { LanguageService } from '../core/services/translate.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass,TitleCasePipe,TranslatePipe],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
+  userLanguage!:string;
+  suppotedLanguage:string[]=[];
+
+  english: string = "english";
+  chinese: string = "chinese";
+  swahili: string = "swahili";
+  french: string = "french";
   
-  constructor(public weatherService:WeatherService){
+  constructor(private languageService:LanguageService,public weatherService:WeatherService){
 
   }
   
+  ngOnInit(): void {
+    this.userLanguage = this.languageService.getUserLanguage()
+  }
+
   @Output()afficherBloc=new EventEmitter<boolean>();
 
   onTodayClick(){
@@ -39,6 +52,11 @@ export class NavBarComponent {
 
   onSearch(location:string){
     this.weatherService.cityName = location;
+    this.weatherService.dataLoadedSubject.next(false);
     this.weatherService.getData();
+  }
+  onChangeLanguage(language:string):void{
+    this.languageService.setLanguage(language)
+    this.userLanguage = language
   }
 }

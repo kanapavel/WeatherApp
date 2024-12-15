@@ -6,7 +6,7 @@ import { TemperatureData } from '../models/TemperatureData';
 import { TodayData } from '../models/TodayData';
 import { WeekData } from '../models/WeekData';
 import { TodaysHighlight } from '../models/TodaysHighlight';
-import { Observable } from 'rxjs';
+import { Observable,BehaviorSubject } from 'rxjs';
 import { EnvironmentVariables } from '../../environment/EnvironmentVariables';
 
 @Injectable({
@@ -36,6 +36,9 @@ export class WeatherService {
 
   celcius = true;
   fahrenheit = false;
+
+  public dataLoadedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public dataLoaded$: Observable<boolean> = this.dataLoadedSubject.asObservable();
 
   constructor(private http:HttpClient) {
     this.getData();
@@ -171,7 +174,7 @@ export class WeatherService {
     });
   }
 
-  getData(){
+  getData() {
     this.todayData = [];
     this.weekData = [];
     this.temperatureData = new TemperatureData();
@@ -179,21 +182,36 @@ export class WeatherService {
 
     let latitude = 0;
     let longitude = 0;
-    this.getLocationDetails(this.cityName,this.language).subscribe({
-      next:(response)=>{
+
+    this.getLocationDetails(this.cityName, this.language).subscribe({
+      next: (response) => {
         this.locationDetails = response;
-        latitude = this.locationDetails?.location.latitude[0];
-        longitude = this.locationDetails?.location.longitude[0];
 
-        this.getWeatherReport(this.date,latitude,longitude,this.language,this.units).subscribe({
-          next:(response)=>{
-            this.weatherDetails = response
+        // Vérifiez si les coordonnées sont disponibles
+        if (this.locationDetails?.location.latitude && this.locationDetails?.location.longitude) {
+          latitude = this.locationDetails.location.latitude[0];
+          longitude = this.locationDetails.location.longitude[0];
 
-            this.prepareData();
-          }
-        })
+          this.getWeatherReport(this.date, latitude, longitude, this.language, this.units).subscribe({
+            next: (weatherResponse) => {
+              this.weatherDetails = weatherResponse;
+              this.prepareData();
+              this.dataLoadedSubject.next(true); // Données chargées avec succès
+            },
+            error: (weatherError) => {
+              console.error('Erreur lors de la récupération des données météo:', weatherError);
+              this.dataLoadedSubject.next(false); // Indique que les données n'ont pas pu être chargées
+            }
+          });
+        } else {
+          console.error('Coordonnées non disponibles dans la réponse de localisation.');
+          this.dataLoadedSubject.next(false); // Indique que les données n'ont pas pu être chargées
+        }
       },
+      error: (locationError) => {
+        console.error('Erreur lors de la récupération des détails de localisation:', locationError);
+        this.dataLoadedSubject.next(false); // Indique que les données n'ont pas pu être chargées
+      }
     });
-
   }
 }

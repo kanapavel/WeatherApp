@@ -2,7 +2,7 @@
     <div  *ngFor="let card of weatherService.weekData"
         class="flex flex-col items-center justify-center bg-white rounded-lg h-full p-2 md:h-40">
         <div class="flex flex-col items-center justify-center">
-            <h2>{{card.day}}</h2>
+            <h2>{{card.day|translate}}</h2>
             <img class="w-20 my-2" src={{card.summaryImage}} alt="">
             <p><strong> {{this.weatherService.celcius == true ? card.tempMax: this.weatherService.celsiusToFahrenheit(card.tempMax) }}°</strong><span class="text-gray-300">-{{this.weatherService.celcius == true ? card.tempMin: this.weatherService.celsiusToFahrenheit(card.tempMin)}}°</span></p>
         </div>
@@ -16,5 +16,13 @@
             <img class="w-20 my-2" src={{card.summaryImage}} alt="">
             <p><strong> {{this.weatherService.celcius == true ? card.temperature: this.weatherService.celsiusToFahrenheit(card.temperature) }}° </strong></p>
         </div>
+    </div>
+</div>
+
+<div *ngIf="isLoading" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-7 gap-4 mt-5">
+    <div *ngFor="let i of  [1,2,3,4,5,6,7]" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg h-48 md:h-48">
+        <p-skeleton class="flex w-full"  styleClass="mt-3 mb-2" />
+        <p-skeleton class="flex w-full h-full" height="80%" shape="rectangle" />
+        <p-skeleton class="flex w-full"  styleClass="" />
     </div>
 </div>

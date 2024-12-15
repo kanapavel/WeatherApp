@@ -65,16 +65,61 @@
               name="search"
               id="topbar-search"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              placeholder="Search places"
+              placeholder="{{'Search places'|translate}}"
               (keydown.enter)="$event.preventDefault(); onSearch(location.value)"
               #location
             />
           </div>
         </form>
+
         <div class="flex items-center gap-5 max-lg:gap-2">
-            <button (click)="onTodayClick()" [ngClass]="{'active':this.weatherService.today}" class="text-gray-300 text-lg font-bold p-2 rounded-md hover:bg-gray-50 transition-all ease-in-out duration-200 max-sm:text-base">Today</button>
-            <button (click)="onWeekClick()" [ngClass]="{'active':this.weatherService.week}" class="text-gray-300 text-lg font-bold p-2 rounded-md hover:bg-gray-50 transition-all ease-in-out duration-200 max-sm:text-base">Week</button>
+            <button (click)="onTodayClick()" [ngClass]="{'active':this.weatherService.today}" class="text-gray-300 text-lg font-bold p-2 rounded-md hover:bg-gray-50 transition-all ease-in-out duration-200 max-sm:text-base">{{"Today"|translate}}</button>
+            <button (click)="onWeekClick()" [ngClass]="{'active':this.weatherService.week}" class="text-gray-300 text-lg font-bold p-2 rounded-md hover:bg-gray-50 transition-all ease-in-out duration-200 max-sm:text-base">{{"Week"|translate}}</button>
         </div>
+
+        <div class="flex items-center gap-5 max-sm:hidden">
+          <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-grays-800 hover:text-greens-800 focus:outline-none  font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center" type="button">
+              @if (userLanguage === "en") {
+                  <img src="assets/flag/royaume-uni.png" alt="" class="mr-1">
+                  {{english | titlecase|translate}} 
+              }@else if (userLanguage === "fr") {
+                  <img src="assets/flag/france.png" alt="" class="mr-1">
+                  {{french | titlecase|translate}} 
+              }@else if (userLanguage === "zh") {
+                  <img src="assets/flag/chine.png" alt="" class="mr-1">
+                  {{chinese | titlecase|translate}} 
+              }@else if (userLanguage === "sw") {
+                  <img src="assets/flag/angola.png" alt="" class="mr-1">
+                  {{swahili | titlecase|translate}} 
+              }
+              <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+              </svg>
+          </button>
+  
+          <!-- Dropdown menu -->
+          <div id="dropdown" class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-32 dark:bg-gray-700">
+              <ul class="p-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                  <li class="flex h-full w-full rounded-md hover:bg-grays-100 text-base text-blacks p-1 gap-2" (click)="onChangeLanguage('en')">
+                      <img src="assets/flag/royaume-uni.png" alt="">
+                      <button class=" dark:hover:bg-gray-600 dark:hover:text-white">{{english|titlecase|translate}}</button>
+                  </li>
+                  <li class="flex h-full w-full rounded-md hover:bg-grays-100 text-base text-blacks p-1 gap-2" (click)="onChangeLanguage('fr')">
+                      <img src="assets/flag/france.png" alt="">
+                      <button href="#" class=" dark:hover:bg-gray-600 dark:hover:text-white">{{french|titlecase|translate}}</button>
+                  </li>
+                  <li class="flex h-full w-full rounded-md hover:bg-grays-100 text-base text-blacks p-1 gap-2" (click)="onChangeLanguage('zh')">
+                      <img src="assets/flag/chine.png" alt="">
+                      <button class=" dark:hover:bg-gray-600 dark:hover:text-white">{{chinese|titlecase|translate}}</button>
+                  </li>
+                  <li class="flex h-full w-full rounded-md hover:bg-grays-100 text-base text-blacks p-1 gap-2" (click)="onChangeLanguage('sw')">
+                      <img src="assets/flag/angola.png" alt="">
+                      <button href="#" class=" dark:hover:bg-gray-600 dark:hover:text-white">{{swahili|titlecase|translate}}</button>
+                  </li>
+              </ul>
+          </div>
+        </div>
+
         <div class="flex gap-3 max-lg:hidden">
             <div class="flex items-center gap-3">
                 <button (click)="onCelsiusClick()" [ngClass]="{'bg-gray-700 text-white':this.weatherService.celcius}" class="h-8 w-8 flex items-center rounded-full p-2 bg-gray-100 text-lg font-bold hover:bg-gray-700 hover:text-white transition-all ease-in-out duration-200">°C</button>

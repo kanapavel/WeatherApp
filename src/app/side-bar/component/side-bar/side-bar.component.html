@@ -15,40 +15,55 @@
                 </button>
                 <input type="search" name="search" id="sidebar-search"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Search places"
+                    placeholder="{{'Search places'|translate}}"
                     (keydown.enter)="$event.preventDefault(); onSearch(location.value)"
                     #location />
             </div>
         </form>
         <div class="border-b">
-            <div class="flex items-center justify-center w-full">
+            <div *ngIf="!isLoading" class="flex items-center justify-center w-full">
                 <img class="w-4/5" src={{this.weatherService.temperatureData.summaryImage}} alt="summaryImage">
             </div>
+            <div *ngIf="isLoading" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg h-60 md:h-60">
+                <p-skeleton class="flex min-w-full min-h-full" height="100%" shape="rectangle" />
+            </div>
             <div class="relative w-4/5 flex flex-col items-center justify-center">
-                <p class="text-8xl">
+                <p *ngIf="!isLoading" class="text-8xl">
                      {{this.weatherService.celcius == true ? this.weatherService.temperatureData.temperature:this.weatherService.celsiusToFahrenheit(this.weatherService.temperatureData.temperature)}}
                     <span class="absolute text-5xl">{{this.weatherService.celcius == true ? "°C": "°F" }}</span>
                 </p>
                 <div>
-                    <h2 class="w-4/5 flex items-center justify-center text-xl my-4 ml-8">
-                        {{this.weatherService.temperatureData.day}},
+                    <h2 *ngIf="!isLoading" class="w-4/5 flex items-center justify-center text-xl my-4 ml-8">
+                        {{this.weatherService.temperatureData.day|translate}},
                         <span class="text-gray-400">{{this.weatherService.temperatureData.time}}</span>
                     </h2>
                 </div>
             </div>
+            <div *ngIf="isLoading" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg">
+                <p-skeleton class="flex w-4/5 justify-start" height="3rem"/>
+            </div>
+            <div *ngIf="isLoading" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg">
+                <p-skeleton class="flex w-4/5 justify-start" />
+            </div>
         </div>
         <div class="mt-5 ">
-            <div class="flex items-center gap-3 ml-14">
+            <div *ngIf="!isLoading" class="flex items-center gap-3 ml-14">
                 <img class="w-8" src="assets/nuage/icons8-nuage-50.png" alt="">
-                <p>{{this.weatherService.temperatureData.summaryPhrase}}</p>
+                <p>{{this.weatherService.temperatureData.summaryPhrase|translate}}</p>
             </div>
-            <div class="flex items-center gap-3 ml-14 my-4">
+            <div *ngIf="isLoading" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg">
+                <p-skeleton class="flex w-4/5 justify-start" />
+            </div>
+            <div *ngIf="!isLoading" class="flex items-center gap-3 ml-14 my-4">
                 <img class="w-8" src="assets/pluie-important/icons8-pluie-importante-48.png" alt="">
-                <p>Rain - {{this.weatherService.temperatureData.rainPercent}}</p>
+                <p>{{'Rain'|translate}} - {{this.weatherService.temperatureData.rainPercent}}</p>
+            </div>
+            <div *ngIf="isLoading" class="flex flex-col items-center justify-center p-4 bg-white rounded-lg">
+                <p-skeleton class="flex w-4/5 justify-start" />
             </div>
             <div class="relative w-full">
                 <img class="w-full rounded-md" src="assets/ville.jpg" alt="">
-                <div class="absolute -left-10 top-16 translate-x-1/2 translate-y-1/2 z-10  text-xl font-medium text-white">{{this.weatherService.temperatureData.location}}</div>
+                <div class="absolute -left-10 top-16 translate-x-1/2 translate-y-1/2 z-10  text-xl font-medium text-white">{{this.weatherService.temperatureData.location|translate}}</div>
             </div>
         </div>
     </div>
